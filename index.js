@@ -30,6 +30,10 @@ function displayUniversal(arrayDeProdutos) {
 }
 
 function adicionarNoCarrinho(produtoID) {
+    if(JSON.parse(localStorage.getItem('carrinho')) == null){
+        localStorage.setItem('carrinho', JSON.stringify(carrinhoDeCompras))
+    }
+    carrinhoDeCompras = JSON.parse(localStorage.getItem('carrinho'))
     produtos.forEach(produto => {
         if(produto.id === produtoID){
             if (produto.estoque >= 1) {
@@ -40,16 +44,13 @@ function adicionarNoCarrinho(produtoID) {
                 else {
                     if (acharPosicao(produtoID) > -1) {
                         var posicao = 0
-                        console.log(acharPosicao(produtoID))
                         posicao = acharPosicao(produtoID)
-                        console.log(posicao)
                         carrinhoDeCompras[posicao]["quantidade"] += 1
-                        produto.estoque--
                     } else {
                         carrinhoDeCompras.push({ produto, quantidade: 1 })
-                        produto.estoque -= 1
                     }
                 }
+                produto.estoque -= 1
             }
         }
     })
@@ -92,8 +93,9 @@ function displayCarrinho() {
 
         <td> <button class="btn btn-dark" onclick="removerDoCarrinho(${carrinhoAtual[i].produto.id})">  - </button></td>
         <td>${carrinhoAtual[i].quantidade}</td> 
-        <td> <button class="btn btn-dark" onclick="adicionarNoCarrinho(${carrinhoAtual[i].produto.id})">  + </button></td>
+        <td> <button id="aumentar" class="btn btn-dark" onclick="adicionarNoCarrinho(${carrinhoAtual[i].produto.id})">  + </button></td>
         <td>${subtotal}</td> 
+        <td> <button onchange="verificarEstoque(${carrinhoAtual[i].produto.id})" class="btn btn-dark" onclick="apagarDoCarrinho(${carrinhoAtual[i].produto.id})"> Apagar</td>
         
     </tr>`
         totalCompra += subtotal
@@ -111,4 +113,29 @@ function acharPosicao(produtoID) {
         }
     }
     return -1;
+}
+
+function acharProdutoPorID(produtoID) {
+    var i = 0;
+    for (i = 0; i < produtos.length; i++) {
+        if (produtos[i] == produtoID) {
+            return produtos[i];
+        }
+    }
+    return -1;
+}
+
+function apagarDoCarrinho(produtoID){
+    carrinhoDeCompras = JSON.parse(localStorage.getItem('carrinho'))
+    carrinhoDeCompras.splice(acharPosicao(produtoID), 1)
+    localStorage.setItem('carrinho', JSON.stringify(carrinhoDeCompras))
+    displayCarrinho()
+}
+
+function verificarEstoque(produtoID){
+    let posicao = acharPosicao(produtoID);
+    let produtoVerificado = acharProdutoPorID(produtoID)
+    if(carrinhoDeCompras[posicao].quantidade > produtoVerificado.estoque){
+        document.getElementById("aumentar").classList.add("disabled");
+    }
 }
