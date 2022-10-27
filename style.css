@@ -5,11 +5,14 @@ body {
 
 .header .navbar{
     background: #e2eaef;
+	font-family: "Open Sans", sans-serif;
 }
 
 .clicavel{
     color: #7ac400;
     background: #e2eaef;
+	border-style: solid;
+	border-width: 2px;
     border-radius: 10px;
 }
 
@@ -97,4 +100,7 @@ h2::after {
 	padding: 2px 0;
 }
 
-
+.carrinho-container h1 {
+	justify-content: center;
+	align-items: center;
+}

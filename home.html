@@ -18,8 +18,8 @@
 
 <body>
     <header class="row mt-4 p-2 d-flex justify-content-around align-items-center vh-15 header">
-        <nav class="col-10 navbar navbar-expand-lg navbar-light bg-light ">
-            <a class="navbar-brand" href="#">SHOP</a>
+        <nav class="col-10 navbar navbar-expand-lg navbar-dark ">
+            <a class="navbar-brand" href="#" style="color: black;">SHOP</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -27,17 +27,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home</a>
+                  <a class="nav-link" href="home.html" style="color: black;">Home</a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Categorias
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Carro</a>
-                    <a class="dropdown-item" href="#">Celulares</a>
-                    <a class="dropdown-item" href="#">Madeiras</a>
-                  </div>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Categorias
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="javascript:mostrar('carro')">Carros</a></li>
+                          <li><a class="dropdown-item" href="javascript:mostrar('celular')">Celulares</a></li>
+                          <li><a class="dropdown-item" href="javascript:mostrar('madeira')">Madeiras</a></li>
+                        </ul>
+                      </div>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link clicavel" href="carrinho.html">CARRINHO</a>
@@ -88,7 +90,6 @@
 
         function displayItensInicial() {
             arr = shuffle()
-            console.log(arr)
             var txt = ''
             for (let i = 0; i <= 12; i++) {
                 txt += `<div class="thumb-wrapper">          					
@@ -109,6 +110,16 @@
             search(document.getElementById('procura').value)
         }
 
+        function mostrar(nomeCategoria){
+            var itensDaCategoria = [];
+            produtos.forEach(produto => {
+                if(produto.categoria == nomeCategoria){
+                    itensDaCategoria.push(produto)
+                }
+            });
+            displayUniversal(itensDaCategoria)
+        }
+        
     </script>
 </body>
 

@@ -4,10 +4,83 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="produtos.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Carrinho</title>
 </head>
 <body>
+    <header class="row mt-4 p-2 d-flex justify-content-around align-items-center vh-15 header">
+        <nav class="col-10 navbar navbar-expand-lg navbar-dark ">
+            <a class="navbar-brand" href="#" style="color: black;">SHOP</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="home.html" style="color: black;">Home</a>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Categorias
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="javascript:mostrar('carro')">Carros</a></li>
+                          <li><a class="dropdown-item" href="javascript:mostrar('celular')">Celulares</a></li>
+                          <li><a class="dropdown-item" href="javascript:mostrar('madeira')">Madeiras</a></li>
+                        </ul>
+                      </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link clicavel" href="carrinho.html">CARRINHO</a>
+                </li>
+              </ul>
+              
+                <input class="form-control mr-sm-2 m-1" type="text" placeholder="Procura" id="procura">
+                <button class="btn clicavel my-2 my-sm-0 m-1" onclick="buscar()">Procurar</button>
+            </div>
+          </nav>
+    </header>
+
+    <div class="container carrinho-container">
+        <h1> Carrinho </h1>
+        
+        <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Preço</th>
+                <th> </th>
+                <th scope="col">Quantidade</th>
+                <th> </th>
+                <th scope="col">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="insercaoProdutos">
+              
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th> Total </th>
+                    <td id="totalCarrinho"></td>
+                </tr>
+            </tfoot>
+          </table>
     
+    </div>
+
+    <script>
+        window.onload = displayCarrinho()
+    </script>
 </body>
 </html>
