@@ -46,8 +46,10 @@ function adicionarNoCarrinho(produtoID) {
                         var posicao = 0
                         posicao = acharPosicao(produtoID)
                         carrinhoDeCompras[posicao]["quantidade"] += 1
+                        produto.estoque -= 1
                     } else {
                         carrinhoDeCompras.push({ produto, quantidade: 1 })
+                        produto.estoque -= 1
                     }
                 }
                 produto.estoque -= 1
