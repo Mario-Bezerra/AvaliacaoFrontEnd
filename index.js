@@ -31,13 +31,42 @@ function displayUniversal(arrayDeProdutos) {
 function adicionarNoCarrinho(produtoID){
     produtos.forEach(produto => { 
         if(produto.id == produtoID){
-           carrinhoDeCompras.push(produto)
-        }
+            if(produto.estoque >= 1){
+                if(carrinhoDeCompras.length == 0){
+                    carrinhoDeCompras.push({produto, quantidade : 1})
+                    produto.estoque -= 1
+                }
+                else{
+                    carrinhoDeCompras.forEach(produtoCarrinho => {
+                        if(produtoCarrinho.produto.id == produtoID)
+                        {
+                            produtoCarrinho.quantidade += 1;
+                            produto.estoque -=1;
+                            
+                        } else
+                        {
+                            carrinhoDeCompras.push({produto, quantidade : 1})
+                            produto.estoque -= 1
+                        }
+                    })
+                }
+              }}
     })
+    console.log(carrinhoDeCompras)
     localStorage.setItem('carrinho', carrinhoDeCompras)
 }
 
-function removerDoCarrinho(produtoID){
-    carrinhoDeCompras = produtos.filter(produto => produto.id == produtoID)
-    localStorage.setItem('carrinho', carrinhoDeCompras)
-}
+/* function removerDoCarrinho(produtoID){
+    produtos.forEach(produto => { 
+        if(produto.id == produtoID) { 
+            produto.estoque +=1 
+            if (carrinhoDeCompras.some(produtoCarrinho => produtoCarrinho.id == produtoID)){
+                if(produtoCarrinho.quantidade > 1){
+                    produtoCarrinho.quantidade -= 1;
+                } else {
+                    carrinhoDeCompras = produtos.filter(produto => produto.id != produtoID)
+                }
+            }
+        }
+    }
+} */

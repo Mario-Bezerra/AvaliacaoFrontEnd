@@ -2,9 +2,23 @@ body {
 	background: #e2eaef;
 	font-family: "Open Sans", sans-serif;
 }
+
 .header .navbar{
     background: #e2eaef;
 }
+
+.clicavel{
+    color: #7ac400;
+    background: #e2eaef;
+    border-radius: 10px;
+}
+
+.clicavel:hover{
+    color: white;
+    background-color: #7ac400;
+    border-radius: 10px;
+}
+
 h2 {
 	color: #000;
 	font-size: 26px;
@@ -32,9 +46,8 @@ h2::after {
 }
 .carousel .item {
 	color: #747d89;
-	min-height: 325px;
+	min-height: 400px;
     text-align: center;
-	overflow: hidden;
 }
 .thumb-wrapper {
 	padding: 25px 15px;
