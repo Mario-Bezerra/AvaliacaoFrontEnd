@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="produtos.js"></script>
+    <script src="index.js"></script>
+    <title>Shop</title>
+</head>
+
+<body>
+    <header class="row mt-4 p-2 d-flex justify-content-around align-items-center vh-15 header">
+        <nav class="col-10 navbar navbar-expand-lg navbar-light bg-light ">
+            <a class="navbar-brand" href="#">SHOP</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categorias
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Carro</a>
+                    <a class="dropdown-item" href="#">Celulares</a>
+                    <a class="dropdown-item" href="#">Madeiras</a>
+                  </div>
+                </li>
+                <a href="carrinho.html" class="nav-item m-1"> Carrinho </a>
+              </ul>
+                
+                <input class="form-control mr-sm-2 m-1" type="text" placeholder="Procura" id="procura">
+                <button class="btn btn-outline-success my-2 my-sm-0 m-1" onclick="buscar()">Search</button>
+            </div>
+          </nav>
+    </header>
+
+    <main class="d-flex justify-content-around align-items-center vh-70 vw-90">
+        <div class="container-fluid">
+            <h2>Produtos</h2>
+            <div class="carousel">
+                <div class="item active">
+                    <div class="row">
+                        <div class="content-main col-lg-12 mb-6">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="d-flex justify-content-around align-items-center vh-15 ">
+
+    </footer>
+
+    <script>
+        window.onload = displayItensInicial();
+
+        function shuffle() {
+            var i, arr = [];
+            for (i = 0; i < 29; i++) {
+                arr[i] = i + 1;
+            }
+
+            var p, n, tmp;
+            for (p = arr.length; p;) {
+                n = Math.random() * p-- | 0;
+                tmp = arr[n];
+                arr[n] = arr[p];
+                arr[p] = tmp;
+            }
+            return arr;
+        }
+
+        function displayItensInicial() {
+            arr = shuffle()
+            console.log(arr)
+            var txt = ''
+            for (let i = 0; i <= 12; i++) {
+                txt += `<div class="thumb-wrapper">          					
+                            <div class="img-box">
+                                <img src="${produtos[arr[i]].imagem}" class="img-responsive alt="Imagem quebrada">									
+                            </div>
+                            <div class="thumb-content">
+                                <h4 class="mb-3">${produtos[arr[i]].nome}</h4>
+                                <p class="item-price"><b> R$ ${produtos[arr[i]].preco} </b></p>
+                                <button class="btn btn-dark" onclick="adicionarNoCarrinho(${produtos[arr[i]].id})"> Comprar </button>
+                            </div>
+                        </div>	`
+            }
+            document.getElementsByClassName('content-main')[0].innerHTML = txt;
+        }
+
+        function buscar(){
+            search(document.getElementById('procura').value)
+        }
+
+    </script>
+</body>
+
+</html>
